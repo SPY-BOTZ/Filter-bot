@@ -1,7 +1,21 @@
 import os
+import asyncio
+import threading
+from flask import Flask
 from pyrogram import Client, filters
 
-# Environment variables se credentials lein
+# --- Flask Web Server (Koyeb Health Check ke liye) ---
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return "Bot is alive and running!", 200
+
+def run_flask():
+    port = int(os.environ.get("PORT", 8080))
+    app.run(host="0.0.0.0", port=port, use_reloader=False)
+
+# --- Pyrogram Telegram Bot Setup ---
 API_ID = int(os.environ.get("API_ID", "0"))
 API_HASH = os.environ.get("API_HASH", "")
 BOT_TOKEN = os.environ.get("BOT_TOKEN", "")
@@ -15,9 +29,23 @@ bot = Client(
 
 @bot.on_message(filters.command("start"))
 async def start_command(client, message):
-    await message.reply_text("👋 Hello! Bot is successfully running.")
+    await message.reply_text("👋 Hello! Bot is successfully running and connected.")
 
-if __name__ == "__main__":
-    print("Bot started successfully...")
+@bot.on_message(filters.text & ~filters.command())
+async def handle_text(client, message):
+    pass
+
+def run_bot():
     bot.run()
+
+# --- Main Execution ---
+if __name__ == "__main__":
+    # Flask ko background thread me start karein taaki Koyeb health check pass ho
+    flask_thread = threading.Thread(target=run_flask)
+    flask_thread.daemon = True
+    flask_thread.start()
+    
+    print("Starting Telegram Bot...")
+    # Telegram bot ko run karein
+    run_bot()
     

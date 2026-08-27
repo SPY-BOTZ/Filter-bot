@@ -1,26 +1,16 @@
-# Filter-bot
-# README.md
 
-# Multi-User File Checker & Auto-Uploader Bot
 
-Ek advanced Telegram bot jo public groups ke messages ko read karke private channels / database se files match karta hai aur automatic links provide karta hai.
+**Bot ko Group aur Channel me Kaise Add Karein (Step-by-Step)**
 
-## Features
-- **Multi-user / Multi-group support**: Koi bhi admin apne group me bot add karke apna private channel link kar sakta hai.
-- **MongoDB Integration**: Fast file searching aur data management ke liye.
-- **Interactive Start Message**: Inline buttons aur clear instructions ke sath.
+* **Step 1: Public Group me Bot Add Karna**
+  * Apne Public Group ki settings me jayein ya Bot ke `/start` message me diye gaye **"➕ Add Me To Your Group"** button par click karein.
+  * Bot ko apne group me select karke add kar dein.
+  * Bot ko group me **Administrator** bana dein taaki wo messages read kar sake aur replies bhej sake.
 
-## Deployment on Koyeb
+* **Step 2: Private Channel ko Link Karna**
+  * Apne Private Channel me bot ko **Administrator** add karein (taaki bot channel ke contents read kar sake).
+  * Apne Private Channel ki ID pata karein (e.g., `-100xxxxxxxxxx`). ID nikalne ke liye aap kisi forward bot ka use kar sakte hain ya channel ki post ko group me forward karke inspect kar sakte hain.
+  * Apne Public Group me jayein aur ye command bhejein:
+    `/setchannel -100xxxxxxxxxx` (yahan `-100xxxxxxxxxx` ki jagah apne private channel ki real ID daalein).
+  * Bot success message dega ki channel link ho chuka hai. Ab koi bhi user group me file name ya year likhega toh bot us channel ke database se match karke turant reply karega!
 
-1. **GitHub Repository Banayein:** Upar di gayi saari files (`bot.py`, `requirements.txt`, `runtime.txt`, `Procfile`, `README.md`) ko apne GitHub repo me push kar dein.
-2. **Koyeb Dashboard:** 
-   - New App par click karein aur apna GitHub repository select karein.
-   - **Builder:** Python
-   - **Run Command:** `python bot.py`
-3. **Environment Variables Add Karein:**
-   - `API_ID`: Aapka Telegram API ID
-   - `API_HASH`: Aapka Telegram API Hash
-   - `BOT_TOKEN`: BotFather se mila hua token
-   - `MONGO_URI`: MongoDB Atlas connection string
-4. **Deploy:** Deploy button par click karein. Bot bina kisi error ke live ho jayega!
-5. 

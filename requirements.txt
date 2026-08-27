@@ -1,5 +1,1 @@
-pyrogram
-tgcrypto
-flask
-httpx
-pymongo
+python-3.10.11
